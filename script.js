@@ -24,6 +24,10 @@ function checkGuess(answer, guess, tries) {
     console.log('Your guess is too low.');
   } else if (guess === answer) {
     console.log(`Great job, you got it! You guessed the answer in ${10 - tries} ${10 - tries === 1 ? 'try' : 'tries'}`);
+    const retry = confirm("Do you want to play again?");
+
+    if (retry) game()
+    else console.log('Exiting game...')
   }
 }
 
