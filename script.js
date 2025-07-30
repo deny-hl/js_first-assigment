@@ -1,14 +1,15 @@
+let max = 100;
+
 function generateRandomNumber() {
-  let max = 100;
+
 
   return Math.floor(Math.random() * max) + 1;
 }
 
 function getPlayerGuess() {
-  let input = parseInt(prompt('Guess the number between 1 and 100:'));
+  let input = parseInt(prompt(`Guess the number between 1 and ${max}:`));
 
-
-  if (input === null || isNaN(input)) {
+  if (input === null || isNaN(input) || input > max || input < 1) {
     console.log('Invalid input!')
     return getPlayerGuess()
   } else {
@@ -35,7 +36,6 @@ function checkGuess(answer, guess, tries) {
 function game() {
   let tries = 10
   const answer = generateRandomNumber();
-  console.log(answer);
   let guess
 
   do {
