@@ -4,58 +4,47 @@ function generateRandomNumber() {
   return Math.floor(Math.random() * max) + 1;
 }
 
-let answer = generateRandomNumber();
-
-console.log(answer);
-
-
-
 function getPlayerGuess() {
-
-  let guess = parseInt(prompt('Guess the number between 1 and 100:'));
-
-  while(guess == null || isNaN(guess)) {
-    guess = parseInt(prompt('Invalid input. Provide a valid number.'));
-  }
-
-  return guess;
-}
-
-let guess = getPlayerGuess();
-console.log(guess);
+  let input = parseInt(prompt('Guess the number between 1 and 100:'));
 
 
-
-function checkGuess(answer, guess) {
-  if (guess > answer) {
-    return 'Your guess is too hight.';
-  } else if (guess < answer) {
-    return 'Your guess is too low.';
+  if (input === null || isNaN(input)) {
+    console.log('Invalid input!')
+    return getPlayerGuess()
   } else {
-    return 'Great job, you got it!';
+    return input;
   }
 }
 
-let check = checkGuess(answer, guess);
 
-console.log(check);
-
-
-function game(answer, guess, check) {
-  let tries = 10;
-    while(guess !== answer && tries > 0) {
-
-      if(guess > answer) {
-        tries--;
-        guess = prompt(check + tries);
-      } else {
-        guess = prompt(check + tries);
-      }
-      
-      if(guess === answer) {
-        alert('Congratulation! You guessed the number!');
-      } else {
-        alert('Out of guesses! The number was ' + answer);
-      }
+function checkGuess(answer, guess, tries) {
+  if (guess > answer) {
+    console.log('Your guess is too high.');
+  } else if (guess < answer) {
+    console.log('Your guess is too low.');
+  } else if (guess === answer) {
+    console.log(`Great job, you got it! You guessed the answer in ${10 - tries} ${10 - tries === 1 ? 'try' : 'tries'}`);
   }
 }
+
+
+function game() {
+  let tries = 10
+  const answer = generateRandomNumber();
+  console.log(answer);
+  let guess
+
+  do {
+    tries--
+    guess = getPlayerGuess()
+    console.log(`You chose ${guess}!`);
+    checkGuess(answer, guess, tries)
+
+
+  }
+  while (guess !== answer && tries > 0)
+
+  if (tries === 0) console.log('You are out of tries! Better luck next time!')
+}
+
+game()
