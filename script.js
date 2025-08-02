@@ -1,15 +1,27 @@
+alert(
+  'Open Developer Console to see extra logs and hints:\n' +
+  '- Windows/Linux: F12 or Ctrl+Shift+I\n' +
+  '- Mac: Cmd+Option+I'
+);
+
 let max = 100;
 
 function generateRandomNumber() {
-
-
   return Math.floor(Math.random() * max) + 1;
 }
 
-function getPlayerGuess() {
-  let input = parseInt(prompt(`Guess the number between 1 and ${max}:`));
 
-  if (input === null || isNaN(input) || input > max || input < 1) {
+function getPlayerGuess() {
+  let input = prompt(`Guess the number between 1 and ${max}:`);
+
+  if (input === null) {
+    console.log('Game cancelled by user. Thanks for playing!');
+    return null;
+  }
+
+  input = parseInt(input);
+
+  if (isNaN(input) || input > max || input < 1) {
     console.log('Invalid input!')
     return getPlayerGuess()
   } else {
@@ -41,6 +53,9 @@ function game() {
   do {
     tries--
     guess = getPlayerGuess()
+
+    if (guess === null) return;
+
     console.log(`You chose ${guess}!`);
     checkGuess(answer, guess, tries)
 
