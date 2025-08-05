@@ -1,4 +1,5 @@
 alert(
+  'Welcome to the number guessing game!'
   'Open Developer Console to see extra logs and hints:\n' +
   '- Windows/Linux: F12 or Ctrl+Shift+I\n' +
   '- Mac: Cmd+Option+I'
